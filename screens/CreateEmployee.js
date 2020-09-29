@@ -55,6 +55,15 @@ const CreateEmployee = () => {
       >
         Upload Image
       </Button>
+      <Button
+        icon="content-save"
+        style={styles.inputStyle}
+        mode="contained"
+        onPress={() => setModal(true)}
+        theme={theme}
+      >
+        Save
+      </Button>
       <Modal animationType="slide" transparent={true} visible={modal}>
         <View style={styles.modalView}>
           <View style={styles.modalButtonView}>
@@ -67,7 +76,8 @@ const CreateEmployee = () => {
               Camera
             </Button>
             <Button
-              mode="outlined"
+              icon="image-area"
+              mode="contained"
               theme={theme}
               onPress={() => setModal(false)}
             >
@@ -105,7 +115,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 2,
     width: "100%",
-    backgroundColor: "#b8e6ff",
+    backgroundColor: "#fff",
   },
 });
 
