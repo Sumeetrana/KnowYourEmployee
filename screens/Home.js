@@ -2,20 +2,54 @@ import React from "react";
 import { StyleSheet, Text, View, Image, FlatList } from "react-native";
 import { Card, FAB } from "react-native-paper";
 
-const Home = () => {
+const Home = (props) => {
   const employees = [
-    { id: 1, name: "mukesh", position: "web dev" },
-    { id: 2, name: "suresh", position: "Mobile dev" },
-    { id: 3, name: "ramesh", position: "devops" },
-    { id: 4, name: "hitesh", position: "ml expert" },
-    { id: 5, name: "hitesh", position: "ml expert" },
-    { id: 6, name: "hitesh", position: "ml expert" },
-    { id: 7, name: "hitesh", position: "ml expert" },
-    { id: 8, name: "hitesh", position: "ml expert" },
-    { id: 9, name: "hitesh", position: "ml expert" },
+    {
+      id: "1",
+      name: "mukesh",
+      position: "web dev",
+      salary: "5 LPA",
+      phone: "1234567891",
+      picture:
+        "https://images.unsplash.com/photo-1600983639338-39259c1effe1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+      email: "abc@abc.com",
+    },
+    {
+      id: "2",
+      name: "suresh",
+      position: "Mobile dev",
+      salary: "8 LPA",
+      phone: "1234567890",
+      picture:
+        "https://images.unsplash.com/photo-1600983639338-39259c1effe1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+      email: "abc@abc.com",
+    },
+    {
+      id: "3",
+      name: "ramesh",
+      position: "devops",
+      salary: "7 LPA",
+      phone: "1234567892",
+      picture:
+        "https://images.unsplash.com/photo-1600983639338-39259c1effe1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+      email: "abc@abc.com",
+    },
+    {
+      id: "4",
+      name: "hitesh",
+      position: "ml expert",
+      salary: "6 LPA",
+      phone: "1234567893",
+      picture:
+        "https://images.unsplash.com/photo-1600983639338-39259c1effe1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+      email: "abc@abc.com",
+    },
   ];
   const resultList = (item) => (
-    <Card style={{ margin: 5 }}>
+    <Card
+      style={{ margin: 5 }}
+      onPress={() => props.navigation.navigate("Profile", { item })}
+    >
       <View style={styles.myCard}>
         <Image
           style={{ width: 75, height: 75, borderRadius: 150 / 2 }}
@@ -32,19 +66,19 @@ const Home = () => {
     </Card>
   );
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <FlatList
         data={employees}
         renderItem={({ item }) => {
           return resultList(item);
         }}
-        keyExtractor={(item) => `${item.id}`}
+        keyExtractor={(item) => item.id}
       />
       <FAB
         style={styles.fab}
         small={false}
         icon="plus"
-        onPress={() => console.log("Pressed")}
+        onPress={() => props.navigation.navigate("CreateEmployee")}
       />
     </View>
   );

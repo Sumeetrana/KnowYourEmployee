@@ -1,10 +1,19 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, Linking } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Title, Card, Button } from "react-native-paper";
 import { MaterialIcons } from "@expo/vector-icons";
 
-const Profile = () => {
+const Profile = (props) => {
+  const {
+    id,
+    name,
+    email,
+    salary,
+    position,
+    phone,
+    picture,
+  } = props.route.params.item;
   return (
     <View style={styles.root}>
       <LinearGradient
@@ -20,32 +29,31 @@ const Profile = () => {
             marginTop: -60,
           }}
           source={{
-            uri:
-              "https://images.unsplash.com/photo-1601285526788-6b4a44abc15a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80",
+            uri: `${picture}`,
           }}
         />
       </View>
       <View style={{ alignItems: "center" }}>
-        <Title>Ramesh</Title>
-        <Text style={{ fontSize: 15 }}>Web Developer</Text>
+        <Title>{name}</Title>
+        <Text style={{ fontSize: 15 }}>{position}</Text>
       </View>
       <View style={{ margin: 15 }}>
         <Card style={styles.myCard}>
           <View style={styles.infoView}>
             <MaterialIcons name="email" size={30} color="#099aaa" />
-            <Text style={styles.view__text}>abc@gmail.com</Text>
+            <Text style={styles.view__text}>{email}</Text>
           </View>
         </Card>
         <Card style={styles.myCard}>
           <View style={styles.infoView}>
             <MaterialIcons name="phone" size={30} color="#099aaa" />
-            <Text style={styles.view__text}>1234567890</Text>
+            <Text style={styles.view__text}>{phone}</Text>
           </View>
         </Card>
         <Card style={styles.myCard}>
           <View style={styles.infoView}>
             <MaterialIcons name="attach-money" size={30} color="#099aaa" />
-            <Text style={styles.view__text}>5 LPA</Text>
+            <Text style={styles.view__text}>{salary}</Text>
           </View>
         </Card>
       </View>
