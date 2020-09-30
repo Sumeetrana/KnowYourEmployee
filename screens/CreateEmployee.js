@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Modal } from "react-native";
+import { View, Text, StyleSheet, Modal, Alert } from "react-native";
 import { TextInput, Button } from "react-native-paper";
+import * as ImagePicker from "expo-image-picker";
 
 const CreateEmployee = () => {
   const [name, setName] = useState("");
@@ -9,6 +10,35 @@ const CreateEmployee = () => {
   const [salary, setSalary] = useState("");
   const [picture, setPicture] = useState("");
   const [modal, setModal] = useState(false);
+
+  const pickFromGallery = async () => {
+    const { status } = await ImagePicker.requestCameraRollPermissionsAsync();
+    if (status !== "granted") {
+      Alert.alert("Sorry, we need camera roll permissions to make this work!");
+    } else {
+      let data = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 0.5,
+      });
+      console.log(data);
+    }
+  };
+  const pickFromCamera = async () => {
+    const { status } = await ImagePicker.requestCameraPermissionsAsync();
+    if (status !== "granted") {
+      Alert.alert("Sorry, we need camera permissions to make this work!");
+    } else {
+      let data = await ImagePicker.launchCameraAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 0.5,
+      });
+      console.log(data);
+    }
+  };
 
   return (
     <View style={styles.root}>
@@ -71,7 +101,7 @@ const CreateEmployee = () => {
               icon="camera"
               mode="contained"
               theme={theme}
-              onPress={() => setModal(false)}
+              onPress={() => pickFromCamera()}
             >
               Camera
             </Button>
@@ -79,7 +109,7 @@ const CreateEmployee = () => {
               icon="image-area"
               mode="contained"
               theme={theme}
-              onPress={() => setModal(false)}
+              onPress={() => pickFromGallery()}
             >
               Gallery
             </Button>
